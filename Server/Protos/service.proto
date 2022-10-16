@@ -7,15 +7,15 @@ package Services;
 //this will translate into server and client stub
 service Service {    
     //this is will translate into a service operation
-    rpc Add(AddInput) returns (AddOutput) {}
-    rpc CanSubtractLiquid() returns (CanSubtractLiquidOutput) {}
-    rpc SubtractLiquid(AddInput) returns (AddOutput) {}
-    rpc CanAddLiquid() returns (CanAddLiquidOutput) {}
-    rpc AddLiquid(AddInput) returns (AddOutput) {}
+    rpc CanSubtractLiquid(Empty) returns (CanSubtractLiquidOutput) {}
+    rpc SubtractLiquid(Liquid) returns (AddOutput) {}
+    rpc CanAddLiquid(Empty) returns (CanAddLiquidOutput) {}
+    rpc AddLiquid(Liquid) returns (AddOutput) {}
 }
 
+message Empty {}
 //message must be described outside the service definition
-message AddInput {
+message Liquid {
     int32 amount = 1;  //the number (=1) indicates field ordering inside structure
 }
 

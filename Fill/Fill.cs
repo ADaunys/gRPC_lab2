@@ -57,17 +57,26 @@ class Client
 
                 while (true)
                 {
-                    //generate two random numbers to add
-                    int left = (int)Math.Round(50.0d - random.NextDouble() * 100.0d);
-                    int right = (int)Math.Round(50.0d - random.NextDouble() * 100.0d);
+                    var canAdd = client.CanAddLiquid(new Empty { }).Value;
 
-                    //invoke service adder
-                    int sum = client.Add(new AddInput { Left = left, Right = right }).Value;
+                    Thread.Sleep(2000);
 
-                    //log results
-                    log.Info($"Added {left} to {right} got {sum}.");
+                    var liquidToAdd = random.Next(1, 20);
 
-                    //prevent console spamming
+                    if (canAdd)
+                    {
+                        log.Info($"Generated amount to add: {liquidToAdd}.");
+                        var addedLiquid = client.AddLiquid(new Liquid { Amount = liquidToAdd }).Value;
+                        log.Info($"Amount of liquid added: {addedLiquid}.");
+                        log.Info("\n");
+                    }
+                    else
+                    {
+                        log.Info("I cannot add any more liquid.");
+                        log.Info("\n");
+                    }
+                    log.Info("---");
+
                     Thread.Sleep(2000);
                 }
             }

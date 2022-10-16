@@ -27,29 +27,29 @@ public class Service : Services.Service.ServiceBase
     /// </summary>
     private ServiceLogic logic = new ServiceLogic();
 
-    public Task<AddOutput> CanSubtractLiquid(ServerCallContext context)
+    public override Task<CanSubtractLiquidOutput> CanSubtractLiquid(Empty empty, ServerCallContext context)
     {
         log.Info($"Service instance hash code: {this.GetHashCode()}.");
 
         lock (accessLock)
         {
-            var result = new AddOutput { Value = logic.CanSubtractLiquid() ? 1 : 0 };
+            var result = new CanSubtractLiquidOutput { Value = logic.CanSubtractLiquid() };
             return Task.FromResult(result);
         }
     }
 
-    public Task<AddOutput> CanAddLiquid(ServerCallContext context)
+    public override Task<CanAddLiquidOutput> CanAddLiquid(Empty empty, ServerCallContext context)
     {
         log.Info($"Service instance hash code: {this.GetHashCode()}.");
 
         lock (accessLock)
         {
-            var result = new AddOutput { Value = logic.CanAddLiquid() ? 1 : 0 };
+            var result = new CanAddLiquidOutput { Value = logic.CanAddLiquid() };
             return Task.FromResult(result);
         }
     }
 
-    public Task<AddOutput> SubtractLiquid(AddInput input, ServerCallContext context)
+    public override Task<AddOutput> SubtractLiquid(Liquid input, ServerCallContext context)
     {
         log.Info($"Service instance hash code: {this.GetHashCode()}.");
 
@@ -60,7 +60,7 @@ public class Service : Services.Service.ServiceBase
         }
     }
 
-    public Task<AddOutput> AddLiquid(AddInput input, ServerCallContext context)
+    public override Task<AddOutput> AddLiquid(Liquid input, ServerCallContext context)
     {
         log.Info($"Service instance hash code: {this.GetHashCode()}.");
 

@@ -63,16 +63,19 @@ public class Server
         //start the server
         StartServer(args);
 
-        if (clientIsActive)
+        while (true)
         {
-            log.Info("Client is working...");
-            Thread.Sleep(2000);
-            Server.clientIsActive = false;
+            if (clientIsActive)
+            {
+                log.Info("Client is working...");
+                Thread.Sleep(2000);
+                Server.clientIsActive = false;
+            }
+            lowerBound = new Random().Next(0, 50);
+            upperBound = new Random().Next(lowerBound + 1, 100);
+            log.Info("Bounds changed to: " + lowerBound + " " + upperBound + " and current capacity is: " + capacity);
+            Thread.Sleep(4000);
         }
-        lowerBound = new Random().Next(0, 50);
-        upperBound = new Random().Next(lowerBound + 1, 100);
-        log.Info("Bounds changed to: " + lowerBound + " " + upperBound + " and current capacity is: " + capacity);
-        Thread.Sleep(4000);
     }
 
     /// <summary>
