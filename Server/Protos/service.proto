@@ -8,14 +8,25 @@ package Services;
 service Service {    
     //this is will translate into a service operation
     rpc Add(AddInput) returns (AddOutput) {}
+    rpc CanSubtractLiquid() returns (CanSubtractLiquidOutput) {}
+    rpc SubtractLiquid(AddInput) returns (AddOutput) {}
+    rpc CanAddLiquid() returns (CanAddLiquidOutput) {}
+    rpc AddLiquid(AddInput) returns (AddOutput) {}
 }
 
 //message must be described outside the service definition
 message AddInput {
-    int32 left = 1;   //the number (=1) indicates field ordering inside structure
-    int32 right = 2;
+    int32 amount = 1;  //the number (=1) indicates field ordering inside structure
 }
 
 message AddOutput {
     int32 value = 1;
+}
+
+message CanSubtractLiquidOutput {
+    bool value = 1;
+}
+
+message CanAddLiquidOutput {
+    bool value = 1;
 }
