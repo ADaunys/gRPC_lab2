@@ -65,14 +65,14 @@ class Client
 
                     if (canPump)
                     {
-                        log.Info($"Generated amount to add: {liquidToPump}.");
+                        log.Info($"Generated amount to subtract: {liquidToPump}.");
                         var pumpedLiquid = client.SubtractLiquid(new Liquid { Amount = liquidToPump }).Value;
-                        log.Info($"Amount of liquid added: {pumpedLiquid}.");
+                        log.Info($"Amount of liquid subtracted: {pumpedLiquid}.");
                         log.Info("\n");
                     }
                     else
                     {
-                        log.Info("I cannot add any more liquid.");
+                        log.Info("I cannot subtract any more liquid.");
                         log.Info("\n");
                     }
                     log.Info("---");
